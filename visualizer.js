@@ -9,7 +9,7 @@ class Ball {
         this.x = x;
         this.y = y;
         this.radius = 8;
-        this.color = 'black';
+        this.color = 'white';
         this.jumpForce = 0;
         this.fallForce = 0.1;
         this.isFalling = true;
