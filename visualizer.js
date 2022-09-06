@@ -53,8 +53,27 @@ balls.forEach(ball => {
 
 function animate(){
     if (microphone.initialized){
+        ctx.clearRect(0,0, canvas.width, canvas.height);
         const samples = microphone.getSamples();
-        console.log(samples)
+
+        balls.forEach((ball, index) => {
+            if (ball.isFalling && ball.y < canvas.height/2){
+
+                ball.fall();
+            } else if (ball.y > canvas.height/2){
+                ball.isFalling = false;
+                ball.jumpForce = Math.abs(samples[index]) * 10;
+                //balls jump force
+            }
+
+            if (ball.isFalling == false){
+                ball.jump();
+                if (ball.jumpForce <= 0){
+                    ball.isFalling = true;
+                }
+            }
+            ball.draw();
+        })
     }
     requestAnimationFrame(animate);
 }
